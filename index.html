@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>2Blox Map R&D</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.js"></script>
+<link href="https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+
+<style type="text/css">
+	body { margin: 0; padding: 0; background-color: #DFEDF7; }
+	#header { position: absolute; top: 0; bottom: 0; width: 100%; height:70vh; border-bottom: 5px solid #fff; }
+	#map { position: absolute; top: 0; bottom: 0; left:0; right:0; }
+	#mapoverlay {position: absolute; top:0; left: 0; bottom: 0; width: 60%; pointer-events: none;
+		background: linear-gradient(90deg, rgba(3,7,95,0.9) 0%, rgba(3,7,95,0.9) 64%, rgba(0,0,0,0) 100%);
+
+}
+
+#header #content {width: 40%; position:absolute; top:0; left:10%; bottom:0; display: flex; flex-direction: column; justify-content: center; }
+#header h2 {font-family: 'Roboto', sans-serif;font-weight: 700; font-size:65px; color:#fff; margin:0}
+#header h3 {font-family: 'Roboto', sans-serif;font-weight: 700; font-size:65px; color:#78CFED; margin:0}
+#header p {font-family: 'Roboto', sans-serif;font-weight: 300; font-size:15px; color:#fff; line-height: 28px;}
+
+
+</style>
+</head>
+<body>
+	<div id="header">
+		
+		<div id="map"></div>
+		<div id="mapoverlay"></div>
+		<div id="content">
+			<h2>Turn your city blocks</h2>
+			<h3>into tangible data</h3>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut aliquet ligula lectus, ac sagittis nunc scelerisque nec. In sit amet interdum velit. Donec tincidunt diam sed libero condimentum, ut facilisis mi maximus. Suspendisse fermentum tortor at magna elementum lobortis.</p>
+		</div>
+	</div>
+<script>
+var map = new maplibregl.Map({
+container: 'map',
+style:'2blox.json',
+zoom: 13,
+pitch: 60,
+center: [4.352928, 50.846331]
+});
+ 
+map.on('load', function () {
+
+	rotateCamera(0);
+
+});
+ 
+//map.addControl(new maplibregl.NavigationControl());
+
+
+function rotateCamera(timestamp) 
+{
+map.rotateTo((-timestamp / 100) % 360, { duration: 0 });
+requestAnimationFrame(rotateCamera);
+}
+
+
+</script>
+ 
+</body>
+</html>
